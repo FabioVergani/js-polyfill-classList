@@ -1,0 +1,41 @@
+function(element){
+ var o=element, p='classList';
+ if(p in e){
+
+ }else{
+ };
+};
+
+
+
+	var getTokens=function(){return elem.className.split(/\s+/);};
+
+	setTokens=function(list){
+	 var o=classList;
+	 for(var m=list, c=o, l=c.length=m.length, i=0;i<l;i++){c[i]=m[i];};
+	 elem.className = o.join(" ");
+	};
+
+	add=function(s){var m=getTokens();if(m.indexOf(s)===-1){m.push(s);setTokens(m);};}
+
+	remove=function(s){
+	 var m=getTokens(),i=m.indexOf(s);
+	 if(i!==-1){m.splice(i,1);setTokens(m);};
+	}
+
+    toggle=function(s){
+		if(getTokens().indexOf(s)!==-1) {
+			remove(s);return false;
+		}else{
+			add(s);return true;
+		}
+    }
+
+     item=function(i) {
+        return  getTokens()[i] || null
+    }
+
+
+
+
+
