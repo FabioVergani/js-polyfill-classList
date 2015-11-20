@@ -1,41 +1,44 @@
-function(element){
- var o=element, p='classList';
- if(p in e){
+//
+var Ap=Array.prototype;
+//
+var Fp=Function.prototype, Fc=Fp.call;
+//
+var Join=Fc.bind(Ap.join);
+var Push=Fc.bind(Ap.push);
+var Splice=Fc.bind(Ap.splice);
+//------------------------------------------------------
+var defineGetter=(function(e){
+ var O=e, f=O.defineProperty;
+ return f?function(o,p,g){f(o,p,{get:g});}:function(o,p,g){o.__defineGetter__(p,g);};
+})(Object);
+//
+if('classList' in document.documentElement){
 
- }else{
- };
+}else{
+  function DOMTokenList(x){for(var e=this,y=e.el=x,m=e.className.split(/\s+/),i=0,l=m.length;i<l;i++){Push(e,m[i]);};};
+  //
+  DOMTokenList.prototype={
+   toString: function(){return Join(this,'\u0020');},
+   contains: function(x){return this.el.className.indexOf(x) !== -1;},
+   item: function(i){return this[i]||null;},
+   add: function(x){var e=this;if(!e.contains(x)){Push(e,x);e.el.className=e.toString();};},
+   toggle: function(x){var e=this;if(e.contains(x)){e.remove(x);x=false;}else{e.add(x);x=true;};return x;},
+   remove: function(x){
+     var e=this;
+     if(e.contains(x)){
+        for(var i=0,l=e.length; i<l; i++){
+           if(this[i]==x){
+              Splice(e,i,1);
+              e.el.className=e.toString();
+              break;
+           };
+        };
+     };
+   },
+  };
+  //
+  window.DOMTokenList = DOMTokenList;
+  defineGetter(Element.prototype,'classList',function(){return new DOMTokenList(this);});
 };
-
-
-
-	var getTokens=function(){return elem.className.split(/\s+/);};
-
-	setTokens=function(list){
-	 var o=classList;
-	 for(var m=list, c=o, l=c.length=m.length, i=0;i<l;i++){c[i]=m[i];};
-	 elem.className = o.join(" ");
-	};
-
-	add=function(s){var m=getTokens();if(m.indexOf(s)===-1){m.push(s);setTokens(m);};}
-
-	remove=function(s){
-	 var m=getTokens(),i=m.indexOf(s);
-	 if(i!==-1){m.splice(i,1);setTokens(m);};
-	}
-
-    toggle=function(s){
-		if(getTokens().indexOf(s)!==-1) {
-			remove(s);return false;
-		}else{
-			add(s);return true;
-		}
-    }
-
-     item=function(i) {
-        return  getTokens()[i] || null
-    }
-
-
-
-
+//
 
