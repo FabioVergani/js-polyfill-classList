@@ -32,32 +32,25 @@ var textContainWord=function(t,s){return t===s||new RegExp('(\\s|^)'+s+'(\\s|$)'
 
 	 DOMTokenList=function(elem){var e=this;e.el=elem;};
 
-	 DOMTokenList.prototype={
+	 defineGetter((DOMTokenList.prototype={
 		item:function(i){return this.classes[i]||null;},
 		contains:function(s){return textContainWord(this.el.className,s);},
 		add:function(){
-			var k=0, e=this, tc=e.classes, space='\u0020';
-			for(var s,i=0,m=arguments,l=m.length,t=e.el.className,c=tc;i<l;i++){
-				var s=m[i];
-				if(isValidClassname(s) && !textContainWord(t,s)){
-					t+=(space+s);
-					c[c.length]=s;
-					k++;
-				};
-			};
-			if(k!==0){e.el.className=tc.join(space)};
+			var k=0, e=this, tc=e.classes, u='\u0020';
+			for(var s,i=0,m=arguments,l=m.length,t=e.el.className,c=tc;i<l;i++){var s=m[i];if(isValidClassname(s) && !textContainWord(t,s)){t+=(u+s);c[c.length]=s;k++;};};
+			if(k!==0){e.el.className=tc.join(u)};
 		},
 		remove:function(){
-			var k=0, e=this;
-			for(var s,i=0,m=arguments,l=m.length,t=e.el.className;i<l;i++){
-				var s=m[i];if(s!==''){t=t.replace(s,'');k++;};
-			};
-			if(k!==0){e.el.className=t.split(/\s+/).join('\u0020');};
+		 var k=0, e=this;
+		 for(var s,i=0,m=arguments,l=m.length,t=e.el.className;i<l;i++){var s=m[i];if(s!==''){t=t.replace(s,'');k++;};};
+		 if(k!==0){e.el.className=t.split(/\s+/).join('\u0020');};
 		},
-	 };
-
-
-	 defineGetter(DOMTokenList.prototype,'classes',function(){
+		toggle:function(s){
+		 var e=this, t=e.el.className, r=false;
+		 if(textContainWord(t,s)){e.remove(s);}else{e.add(s);r=true;};
+		 return r;
+		}
+	 }),'classes',function(){
 		var n=this.el.className;
 		if(n===undefined||n===null||isBlank(n)){n=[];}else{n=n.trim().split(/\s+/);};
 		return n;
@@ -69,15 +62,15 @@ var textContainWord=function(t,s){return t===s||new RegExp('(\\s|^)'+s+'(\\s|$)'
  };
 })(document);
 //
+
+
+
+
+
+
+
+
 //test:
-
-/*
-
-		 var e=this, m=Slice(arguments);
-		 if(!e.contains(x)){
-			e.el.className=+'sss';
-		 };
-
 /*
 document.body.classList.add('pippo','s');
 //
@@ -102,5 +95,9 @@ console.dir(document.body._classList.contains('sss'));
 
 document.body._classList.add('aaa','a324ssss2','b9f992','aaa');
 document.body._classList.remove('aaa');
+console.log(document.body._classList.toggle('a324ssss2'));
+console.log(document.body._classList.toggle('a324ssss2'));
+
+
 //document.body._classList.add('ssss');
 //console.log();
