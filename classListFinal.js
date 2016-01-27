@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
 
-</body>
-<script>
 //indexOf=w.Array.prototype.indexOf;
 
 (function($w){
@@ -74,9 +66,3 @@ console.log(o.toggle('xxx'));
 })(window);
 
 
-
-
-
-
-</script>
-</html>
