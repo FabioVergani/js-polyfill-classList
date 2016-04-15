@@ -3,6 +3,7 @@
  var dummy=function(){},
  w=$,
  d=w.document,
+ $id=d.getElementById.bind(d),
  dE=d.documentElement,
  dECl=(function($){
 	var o, p, nope=dummy,
@@ -59,16 +60,12 @@
 	e.addEventListener(s,g,b&&true);
  },
 
- swapClass=function(e,a,b){
-	//console.log(dE);
-	//var o=e.classList;
-	//o.remove(a);
-	//o.add(b);
- },
 
  isReady=function(evt){
 	dECl.replace('loading','ready');
-
+	 
+	//alert($id('tb_date'))
+	 
  },
 
  isComplete=function(evt){
